@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: bunkmate
+    runtime: docker
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 8000
+      - key: COOKIE_SECURE
+        value: "1"
