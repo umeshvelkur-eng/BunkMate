@@ -1,12 +1,27 @@
 from http import cookies
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
+import importlib.util
 import json
 import os
-from srm_service import SrmPortalService
+import sys
 
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+try:
+    from srm_service import SrmPortalService
+except ModuleNotFoundError:
+    module_path = ROOT / "srm_service.py"
+    spec = importlib.util.spec_from_file_location("srm_service", module_path)
+    if spec is None or spec.loader is None:
+        raise
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    SrmPortalService = module.SrmPortalService
+
 DATA_FILE = ROOT / "data" / "dashboard.json"
 SESSIONS: dict[str, str] = {}
 SRM_SERVICE = SrmPortalService(DATA_FILE)
