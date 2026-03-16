@@ -1,0 +1,17 @@
+{
+  "name": "BunkMate",
+  "short_name": "BunkMate",
+  "description": "SRM student dashboard for timetable, attendance, planner, marks, and profile access.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050914",
+  "theme_color": "#050914",
+  "icons": [
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

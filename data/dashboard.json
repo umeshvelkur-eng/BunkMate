@@ -1,0 +1,159 @@
+{
+  "student": {
+    "name": "Umesh Kumar",
+    "registrationNumber": "RA2311003012345",
+    "specialisation": "Artificial Intelligence and Data Science",
+    "department": "Computer Science and Engineering",
+    "section": "B",
+    "facultyAdvisor": "Dr. Lakshmi Narayanan",
+    "email": "umesh.kumar@srmist.edu.in"
+  },
+  "lastSynced": "2026-03-15T16:55:00+05:30",
+  "timetable": [
+    {
+      "day": "Monday",
+      "startTime": "08:00",
+      "endTime": "08:50",
+      "subjectCode": "CSE201",
+      "subjectName": "Data Structures",
+      "room": "Tech Park 1 - 402",
+      "faculty": "Dr. Arun Prakash"
+    },
+    {
+      "day": "Monday",
+      "startTime": "10:00",
+      "endTime": "10:50",
+      "subjectCode": "MAT202",
+      "subjectName": "Discrete Mathematics",
+      "room": "UB - 211",
+      "faculty": "Dr. Kavitha N"
+    },
+    {
+      "day": "Tuesday",
+      "startTime": "09:00",
+      "endTime": "09:50",
+      "subjectCode": "CSE203",
+      "subjectName": "Database Systems",
+      "room": "TP - 305",
+      "faculty": "Prof. Hari Shankar"
+    },
+    {
+      "day": "Wednesday",
+      "startTime": "11:00",
+      "endTime": "11:50",
+      "subjectCode": "EEE205",
+      "subjectName": "Digital Logic",
+      "room": "AB1 - 118",
+      "faculty": "Dr. Nivetha R"
+    }
+  ],
+  "attendance": [
+    {
+      "subjectCode": "CSE201",
+      "subjectName": "Data Structures",
+      "faculty": "Dr. Arun Prakash",
+      "attendedClasses": 28,
+      "conductedClasses": 34
+    },
+    {
+      "subjectCode": "MAT202",
+      "subjectName": "Discrete Mathematics",
+      "faculty": "Dr. Kavitha N",
+      "attendedClasses": 18,
+      "conductedClasses": 28
+    },
+    {
+      "subjectCode": "CSE203",
+      "subjectName": "Database Systems",
+      "faculty": "Prof. Hari Shankar",
+      "attendedClasses": 22,
+      "conductedClasses": 29
+    },
+    {
+      "subjectCode": "EEE205",
+      "subjectName": "Digital Logic",
+      "faculty": "Dr. Nivetha R",
+      "attendedClasses": 24,
+      "conductedClasses": 30
+    }
+  ],
+  "marks": [
+    {
+      "subjectName": "Data Structures",
+      "internal": 24,
+      "assignment": 18,
+      "exam": 44,
+      "total": 86
+    },
+    {
+      "subjectName": "Discrete Mathematics",
+      "internal": 20,
+      "assignment": 17,
+      "exam": 39,
+      "total": 76
+    },
+    {
+      "subjectName": "Database Systems",
+      "internal": 23,
+      "assignment": 19,
+      "exam": 42,
+      "total": 84
+    }
+  ],
+  "courses": [
+    {
+      "subjectCode": "CSE201",
+      "subjectName": "Data Structures",
+      "faculty": "Dr. Arun Prakash",
+      "credits": 4,
+      "hoursPerWeek": 5
+    },
+    {
+      "subjectCode": "MAT202",
+      "subjectName": "Discrete Mathematics",
+      "faculty": "Dr. Kavitha N",
+      "credits": 3,
+      "hoursPerWeek": 4
+    },
+    {
+      "subjectCode": "CSE203",
+      "subjectName": "Database Systems",
+      "faculty": "Prof. Hari Shankar",
+      "credits": 4,
+      "hoursPerWeek": 5
+    },
+    {
+      "subjectCode": "EEE205",
+      "subjectName": "Digital Logic",
+      "faculty": "Dr. Nivetha R",
+      "credits": 3,
+      "hoursPerWeek": 4
+    }
+  ],
+  "cgpaCourses": [
+    {
+      "subjectName": "Data Structures",
+      "credits": 4,
+      "grade": "A+",
+      "points": 9
+    },
+    {
+      "subjectName": "Discrete Mathematics",
+      "credits": 3,
+      "grade": "A",
+      "points": 8
+    },
+    {
+      "subjectName": "Database Systems",
+      "credits": 4,
+      "grade": "O",
+      "points": 10
+    },
+    {
+      "subjectName": "Digital Logic",
+      "credits": 3,
+      "grade": "A",
+      "points": 8
+    }
+  ]
+}

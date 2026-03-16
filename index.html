@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BunkMate</title>
+  <meta name="theme-color" content="#050914">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BunkMate">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/app-icon.svg">
+  <link rel="stylesheet" href="/style.css?v=academia-login-v3">
+</head>
+<body>
+  <div class="auth-shell" id="authShell">
+    <form id="loginForm" class="login-card">
+      <div class="brand-lockup brand-lockup-login" aria-label="BunkMate">
+        <span class="brand-word serif">Bunk</span>
+        <span class="brand-word sans">Mate</span>
+      </div>
+      <h1 class="login-title">LOGIN</h1>
+      <p class="login-build">Build: academia-login-v3</p>
+      <button id="installButton" class="secondary-button install-button is-hidden" type="button">Install BunkMate</button>
+      <input id="usernameInput" name="username" type="text" placeholder="Username" autocomplete="username" required>
+      <p id="usernameHint" class="login-hint">Use the credentials required by the active portal.</p>
+      <div class="password-row">
+        <input id="passwordInput" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button id="togglePasswordButton" class="secondary-button password-toggle" type="button">Show</button>
+      </div>
+      <div id="captchaBlock" class="captcha-block is-hidden">
+        <img id="captchaImage" class="captcha-image" alt="SRM captcha">
+        <button id="refreshCaptchaButton" class="secondary-button" type="button">Refresh Captcha</button>
+      </div>
+      <input id="captchaInput" class="is-hidden" name="captcha" type="text" placeholder="Captcha" autocomplete="off">
+      <button id="loginButton" type="submit" class="login-button">Login</button>
+      <p id="loginError" class="login-error" hidden></p>
+      <p id="loginHintDynamic" class="login-hint-dynamic" hidden></p>
+    </form>
+  </div>
+
+  <div class="app-shell is-hidden" id="appShell">
+    <aside class="sidebar animate-in">
+      <div>
+        <div class="brand-lockup" aria-label="BunkMate">
+          <span class="brand-word serif">Bunk</span>
+          <span class="brand-word sans">Mate</span>
+        </div>
+        <p class="brand-kicker">Student Dashboard</p>
+        <h1 class="brand-title">Student Portal</h1>
+      </div>
+
+      <nav class="menu" id="menu">
+        <button class="menu-item is-active" data-target="timetableSection">Timetable</button>
+        <button class="menu-item" data-target="attendanceSection">Attendance</button>
+        <button class="menu-item" data-target="marksSection">Marks</button>
+        <button class="menu-item" data-target="courseSection">Course Details</button>
+        <button class="menu-item" data-target="plannerSection">Planner</button>
+        <button class="menu-item" data-target="cgpaSection">CGPA Calculator</button>
+        <button class="menu-item" data-target="settingsSection">Settings</button>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="topbar animate-in animate-delay-1">
+        <div>
+          <div class="brand-lockup brand-lockup-topbar" aria-label="BunkMate">
+            <span class="brand-word serif">Bunk</span>
+            <span class="brand-word sans">Mate</span>
+          </div>
+          <p class="page-kicker">Academic Overview</p>
+          <h2 id="studentName">Student</h2>
+          <p id="studentMeta" class="subtle-text"></p>
+        </div>
+        <div class="topbar-stats">
+          <div class="top-stat">
+            <span>Last Synced</span>
+            <strong id="lastSynced">-</strong>
+          </div>
+          <div class="top-stat">
+            <span>Attendance Rule</span>
+            <strong>75%</strong>
+          </div>
+        </div>
+      </header>
+
+      <section id="timetableSection" class="view-section animate-in animate-delay-2">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Timetable</p>
+            <h3 id="timetableHeading">Today&apos;s timetable and attendance status</h3>
+            <p id="timetableSubheading" class="subtle-text"></p>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="section-subhead">
+            <h4>Today's Timetable</h4>
+            <p id="todayDayOrderLabel" class="subtle-text"></p>
+          </div>
+          <table class="timetable-table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Subject</th>
+                <th>Room</th>
+                <th>Faculty</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody id="timetableBody"></tbody>
+          </table>
+        </div>
+        <div class="panel-card timetable-browser">
+          <div class="section-subhead">
+            <div>
+              <h4>Browse Day Order Timetables</h4>
+              <p class="subtle-text">Choose a day order or open all timetables together.</p>
+            </div>
+            <div class="day-order-controls" id="dayOrderControls">
+              <button class="secondary-button day-order-button is-active" type="button" data-day-order="1">Day 1</button>
+              <button class="secondary-button day-order-button" type="button" data-day-order="2">Day 2</button>
+              <button class="secondary-button day-order-button" type="button" data-day-order="3">Day 3</button>
+              <button class="secondary-button day-order-button" type="button" data-day-order="4">Day 4</button>
+              <button class="secondary-button day-order-button" type="button" data-day-order="5">Day 5</button>
+              <button class="secondary-button day-order-button" id="showAllDayOrdersButton" type="button">All</button>
+            </div>
+          </div>
+          <table class="timetable-table">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Time</th>
+                <th>Subject</th>
+                <th>Room</th>
+                <th>Faculty</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody id="selectedDayOrderBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="attendanceSection" class="view-section is-hidden">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Attendance</p>
+            <h3>Required and skippable classes by subject</h3>
+          </div>
+        </div>
+        <div class="panel-card attendance-summary-card">
+          <span>Overall Attendance</span>
+          <strong id="overallAttendanceValue">0%</strong>
+          <p id="overallAttendanceMeta" class="subtle-text">0 / 0 classes attended</p>
+        </div>
+        <div id="attendanceCards" class="attendance-grid"></div>
+      </section>
+
+      <section id="marksSection" class="view-section is-hidden">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Marks</p>
+            <h3>Internal and semester marks</h3>
+          </div>
+        </div>
+        <div class="panel-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Type</th>
+                <th>Assessments</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="marksBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="courseSection" class="view-section is-hidden">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Course Details</p>
+            <h3>Faculty, credits, and class allocation</h3>
+          </div>
+        </div>
+        <div id="courseCards" class="course-grid"></div>
+      </section>
+
+      <section id="plannerSection" class="view-section is-hidden">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Planner</p>
+            <h3>Academic planner and day order</h3>
+          </div>
+        </div>
+        <div class="panel-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Day Order</th>
+                <th>Event</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody id="plannerBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="cgpaSection" class="view-section is-hidden">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">CGPA Calculator</p>
+            <h3>Credit-weighted semester performance</h3>
+          </div>
+        </div>
+        <div class="cgpa-layout">
+          <div class="panel-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Credits</th>
+                  <th>Grade</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody id="cgpaBody"></tbody>
+            </table>
+          </div>
+          <div class="cgpa-card">
+            <span>Calculated CGPA</span>
+            <strong id="cgpaValue">0.00</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="settingsSection" class="view-section is-hidden">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Settings</p>
+            <h3>Profile, customization, and logout</h3>
+          </div>
+        </div>
+
+        <div class="settings-stack">
+          <article class="panel-card settings-panel">
+            <h4>Student Profile</h4>
+            <div id="profileGrid" class="profile-grid"></div>
+          </article>
+
+          <article class="panel-card settings-panel">
+            <h4>Customization</h4>
+            <div class="custom-grid">
+              <label class="custom-field">
+                <span>Accent Color</span>
+                <input type="color" id="accentPicker" value="#2d7dff">
+              </label>
+              <label class="custom-field">
+                <span>Text Color</span>
+                <input type="color" id="textPicker" value="#f5f7ff">
+              </label>
+              <label class="custom-field">
+                <span>Panel Color</span>
+                <input type="color" id="panelPicker" value="#111827">
+              </label>
+              <button id="resetThemeButton" class="secondary-button" type="button">Reset Colors</button>
+            </div>
+          </article>
+
+          <article class="panel-card settings-panel logout-panel">
+            <button id="logoutButton" class="danger-button" type="button">Logout</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="attendanceCardTemplate">
+    <article class="attendance-card animate-in">
+      <div class="attendance-card-head">
+        <div>
+          <h4 class="subject-name"></h4>
+          <p class="faculty-name"></p>
+        </div>
+        <div class="radial-wrap">
+          <svg class="attendance-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="attendance-ring-track" cx="60" cy="60" r="42"></circle>
+            <circle class="attendance-ring-progress" cx="60" cy="60" r="42"></circle>
+          </svg>
+          <div class="ring-label percentage-value"></div>
+        </div>
+      </div>
+      <div class="attendance-meta">
+        <span class="classes-summary"></span>
+      </div>
+      <div class="subject-summary-line">
+        <span class="skip-value"></span>
+        <span class="needed-value"></span>
+      </div>
+    </article>
+  </template>
+
+  <div class="modal-shell is-hidden" id="allDayOrdersModal">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <div class="section-subhead">
+        <div>
+          <h4>All Day Order Timetables</h4>
+          <p class="subtle-text">Batch-wise mapped timetable for all day orders.</p>
+        </div>
+        <button class="secondary-button" id="closeAllDayOrdersButton" type="button">Close</button>
+      </div>
+      <div id="allDayOrdersContent" class="all-day-orders-stack"></div>
+    </div>
+  </div>
+
+  <script src="/app.js?v=academia-login-v3"></script>
+</body>
+</html>
